@@ -1,0 +1,148 @@
+version: 2
+
+sources:
+  - name: raw
+    description: "Staging data from Olist"
+    database: olist_project_db
+    schema: raw
+    tables:
+      - name: olist_customers
+        description: "Customer data from Olist"
+        columns:
+          - name: customer_id
+            description: "Unique identifier for each customer"
+          - name: customer_unique_id
+            description: "Unique identifier for each customer (unique across all customers)"
+          - name: customer_zip_code_prefix
+            description: "Customer's zip code prefix"
+          - name: customer_city
+            description: "Customer's city"
+          - name: customer_state
+            description: "Customer's state"
+
+      - name: olist_geolocation
+        description: "Geolocation data from Olist"
+        columns:
+          - name: geolocation_zip_code_prefix
+            description: "Zip code prefix for geolocation"
+          - name: geolocation_lat
+            description: "Latitude of the location"
+          - name: geolocation_lng
+            description: "Longitude of the location"
+          - name: geolocation_city
+            description: "City of the location" 
+          - name: geolocation_state
+            description: "State of the location"
+
+      - name: olist_orders
+        description: "Order data from Olist"
+        columns:
+          - name: order_id
+            description: "Unique identifier for each order"
+          - name: customer_id
+            description: "Unique identifier for each customer"
+          - name: order_status
+            description: "Status of the order (e.g., delivered, shipped, etc.)"
+          - name: order_purchase_timestamp
+            description: "Timestamp when the order was purchased"
+          - name: order_approved_at
+            description: "Timestamp when the order was approved"
+          - name: order_delivered_carrier_date
+            description: "Timestamp when the order was delivered to the carrier"
+          - name: order_delivered_customer_date
+            description: "Timestamp when the order was delivered to the customer"
+          - name: order_estimated_delivery_date
+            description: "Estimated delivery date of the order"
+    
+      - name: olist_order_items
+        description: "Order items data from Olist"
+        columns:
+          - name: order_id
+            description: "Unique identifier for each order"
+          - name: order_item_id
+            description: "Unique identifier for each order item"
+          - name: product_id
+            description: "Unique identifier for each product"
+          - name: seller_id
+            description: "Unique identifier for each seller"
+          - name: shipping_limit_date
+            description: "Shipping limit date for the order item"
+          - name: price
+            description: "Price of the order item"
+          - name: freight_value
+            description: "Freight value of the order item"
+
+      - name: olist_order_payments
+        description: "Order payments data from Olist"
+        columns:
+          - name: order_id
+            description: "Unique identifier for each order"
+          - name: payment_sequential
+            description: "Sequential number of the payment"
+          - name: payment_type
+            description: "Type of payment (e.g., credit card, boleto, etc.)"
+          - name: payment_installments
+            description: "Number of installments for the payment"
+          - name: payment_value
+            description: "Value of the payment"  
+
+      - name: olist_order_reviews
+        description: "Order reviews data from Olist"
+        columns:
+          - name: review_id
+            description: "Unique identifier for each review"
+          - name: order_id
+            description: "Unique identifier for each order"
+          - name: review_score
+            description: "Score given by the customer in the review"
+          - name: review_comment_title
+            description: "Title of the review comment"
+          - name: review_comment_message
+            description: "Message of the review comment"
+          - name: review_creation_date
+            description: "Creation date of the review"
+          - name: review_answer_timestamp
+            description: "Timestamp when the review was answered"
+
+      - name: olist_products
+        description: "Product data from Olist"
+        columns:
+          - name: product_id
+            description: "Unique identifier for each product"
+          - name: product_category_name
+            description: "Category name of the product"
+          - name: product_name_lenght
+            description: "Length of the product name"
+          - name: product_description_lenght
+            description: "Length of the product description"
+          - name: product_photos_qty
+            description: "Number of photos of the product"
+          - name: product_weight_g
+            description: "Weight of the product in grams"
+          - name: product_length_cm
+            description: "Length of the product in centimeters"
+          - name: product_height_cm
+            description: "Height of the product in centimeters"
+          - name: product_width_cm
+            description: "Width of the product in centimeters"
+
+      - name: olist_sellers
+        description: "Seller data from Olist"
+        columns:
+          - name: seller_id
+            description: "Unique identifier for each seller"
+          - name: seller_zip_code_prefix
+            description: "Seller's zip code prefix"
+          - name: seller_city
+            description: "Seller's city"
+          - name: seller_state
+            description: "Seller's state"
+
+      - name: PRODUCT_CATEGORY_TRANSLATION
+        description: "Product category translation data from Olist"
+        columns:
+          - name: product_category_name
+            description: "Category name of the product"
+          - name: product_category_name_english
+            description: "English name of the product category"     
+  

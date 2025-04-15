@@ -1,0 +1,144 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: "Staging model for customer data"
+    columns:
+      - name: customer_id
+        description: "Unique identifier for each customer"
+        tests:
+          - unique
+          - not_null
+      - name: customer_unique_id
+        description: "Unique identifier for each customer across orders"
+        tests:
+          - not_null
+      - name: zip_code_prefix
+        description: "Zip code prefix of the customer"
+        tests:
+          - not_null
+      - name: city
+        description: "City of the customer"
+      - name: states
+        description: "State of the customer"
+
+  - name: stg_geolocation
+    description: "Staging model for geolocation data"
+    columns:
+      - name: geolocation_zip_code_prefix
+        description: "Zip code prefix for geolocation"
+        tests:
+          - not_null
+      - name: geolocation_lat
+        description: "Latitude of the location"
+        tests:
+          - not_null
+      - name: geolocation_lng
+        description: "Longitude of the location"
+        tests:
+          - not_null
+
+  - name: stg_orders
+    description: "Staging model for order data"
+    columns:
+      - name: order_id
+        description: "Unique identifier for each order"
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: "Unique identifier for each customer"
+        tests:
+          - not_null
+      - name: order_status
+        description: "Status of the order (e.g., delivered, shipped, etc.)"
+      - name: order_purchase_timestamp
+        description: "Timestamp when the order was purchased"
+        tests:
+          - not_null
+
+  - name: stg_order_items
+    description: "Staging model for order items data"
+    columns:
+      - name: order_id
+        description: "Unique identifier for each order"
+        tests:
+          - not_null
+      - name: order_item_id
+        description: "Unique identifier for each order item"
+        tests:
+          - unique
+          - not_null
+      - name: product_id
+        description: "Unique identifier for each product"
+        tests:
+          - not_null
+      - name: seller_id
+        description: "Unique identifier for each seller"
+        tests:
+          - not_null
+
+  - name: stg_order_payments
+    description: "Staging model for order payments data"
+    columns:
+      - name: order_id
+        description: "Unique identifier for each order"
+        tests:
+          - not_null
+      - name: payment_type
+        description: "Type of payment (e.g., credit card, boleto, etc.)"
+      - name: payment_value
+        description: "Value of the payment"
+        tests:
+          - not_null
+
+  - name: stg_order_reviews
+    description: "Staging model for order reviews data"
+    columns:
+      - name: review_id
+        description: "Unique identifier for each review"
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: "Unique identifier for each order"
+        tests:
+          - not_null
+      - name: review_score
+        description: "Score given by the customer in the review"
+
+  - name: stg_products
+    description: "Staging model for product data"
+    columns:
+      - name: product_id
+        description: "Unique identifier for each product"
+        tests:
+          - unique
+          - not_null
+      - name: product_category_name
+        description: "Category name of the product"
+      - name: product_weight_g
+        description: "Weight of the product in grams"
+        tests:
+          - not_null
+
+  - name: stg_sellers
+    description: "Staging model for seller data"
+    columns:
+      - name: seller_id
+        description: "Unique identifier for each seller"
+        tests:
+          - unique
+          - not_null
+      - name: seller_zip_code_prefix
+        description: "Seller's zip code prefix"
+        tests:
+          - not_null
+
+  - name: stg_product_category_translation
+    description: "Staging model for product category translation data"
+    columns:
+      - name: product_category_name
+        description: "Category name of the product"
+      - name: product_category_name_english
+        description: "English name of the product category"
