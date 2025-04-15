@@ -1,11 +1,11 @@
 with aggregated_geolocation as (
     -- Pre-aggregate geolocation data to reduce the number of rows processed
     select
-        zip_code_prefix,
-        avg(latitude) as latitude,
-        avg(longitude) as longitude
-    from {{ ref('stg_geolocation') }}
-    group by zip_code_prefix
+        g.zip_code_prefix,
+        avg(g.latitude) as latitude,
+        avg(g.longitude) as longitude
+    from {{ ref('stg_geolocation') }} g
+    group by g.zip_code_prefix
 ),
 customers as (
     select
@@ -20,6 +20,7 @@ customers as (
 sellers as (
     select
         s.seller_id,
+        s.zip_code_prefix,
         g.latitude as seller_lat,
         g.longitude as seller_lng
     from {{ ref('stg_sellers') }} s
@@ -28,9 +29,9 @@ sellers as (
 ),
 orders as (
     select
-        order_id,
-        customer_id
-    from {{ ref('stg_orders') }}
+        o.order_id,
+        o.customer_id
+    from {{ ref('stg_orders') }} o
 ),
 customer_seller_distance as (
     select

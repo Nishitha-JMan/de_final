@@ -1,12 +1,12 @@
 with sellers as (
-    select * from {{ ref('stg_sellers') }}
+    select * from  {{ref('stg_sellers') }}
 ),
 geolocation as (
     select
         zip_code_prefix,
         latitude,
         longitude
-    from {{ ref('stg_geolocation') }}
+    from  {{ref('stg_geolocation')}} 
 ),
 enriched_sellers as (
     select
